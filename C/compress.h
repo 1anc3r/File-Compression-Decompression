@@ -143,15 +143,19 @@ int compress(char *source_filename, char *obj_filename){
     long    frequency[256], source_filesize, obj_filesize=0;
     float   compress_rate;
     char    error_info[256] = "";
-    // FILE *fp = fopen(strcat(source_filename, ".log"), 'w');
+    char source_filename_[24];
+
+    strcpy(source_filename_, source_filename);
+
+    FILE *fp = fopen(strcat(source_filename_, ".log"), "w");
 
     printf("正在压缩……\n");
-    // fprintf(fp, "%s", "正在压缩……\n");
+    fprintf(fp, "正在压缩……\n");
 
     error_code = initial_files(source_filename, &in, obj_filename, &out);
     if  (error_code){
         printf("无法打开输入文件：%s\n", source_filename);
-        // fprintf(fp, "无法打开输入文件：%s\n", source_filename);
+        fprintf(fp, "无法打开输入文件：%s\n", source_filename);
         return error_code;
     }
 
@@ -160,14 +164,14 @@ int compress(char *source_filename, char *obj_filename){
     error_code = create_hftree(ht, frequency, 256);
     if (error_code){
         printf("无法创建哈夫曼树！\n");
-        // fprintf(fp, "%s", "无法创建哈夫曼树！\n");
+        fprintf(fp, "%s", "无法创建哈夫曼树！\n");
         return error_code;
     }
 
     error_code=encode_hftree(ht, hc, 256);
     if (error_code){
         printf("%s\n", "无法创建哈夫曼编码！\n");
-        // fprintf(fp, "%s", "无法创建哈夫曼编码\n");
+        fprintf(fp, "无法创建哈夫曼编码\n");
         return error_code;
     }
 
@@ -182,12 +186,12 @@ int compress(char *source_filename, char *obj_filename){
 
     compress_rate=(float)obj_filesize/source_filesize;
     printf("压缩率 %.2lf%%\n", compress_rate*100);
-    // fprintf(fp, "压缩率 %.2lf%%\n", compress_rate*100);
+    fprintf(fp, "压缩率 %lf%%\n", compress_rate*100);
 
     error_code = write_compress_file(in, out, ht, hc, source_filename, source_filesize);
     if (error_code){
         printf("无法写输出文件！\n");
-        // fprintf(fp, "%s", "无法写输出文件！\n");
+        fprintf(fp, "%s", "无法写输出文件！\n");
         return error_code;
     }
 
@@ -196,29 +200,29 @@ int compress(char *source_filename, char *obj_filename){
     for (i = 0; i < 256; i++){
         free(hc[i].codestr);
     }
-    printf("是否打印编码表？1.是 / 0.否\n");
+    // printf("是否打印编码表？1.是 / 0.否\n");
     // scanf("%d", &key);
     key = 1;
     if (key == 1) {
         printf("编码表：\n");
-        // fprintf(fp, "%s", "编码表：\n");
+        fprintf(fp, "%s", "编码表：\n");
         for(i = 0; i < 256; i++){
             if(frequency[i] == 0){
                 i++;
             } else {
-                printf("%c\t%d\t", i, frequency[i]);
-                // fprintf(fp, "%c\t%d\t", i, frequency[i]);
+                printf("%c\t%d\t",i,frequency[i]);
+                fprintf(fp, "%c\t%d\t", i, frequency[i]);
                 for(j = 0; j < hc[i].codelen; j++){
-                    printf(" %d", hc[i].codestr[j]);
-                    // fprintf(fp, " %d", hc[i].codestr[j]);
+                    printf(" %d",hc[i].codestr[j]);
+                    fprintf(fp, " %d", hc[i].codestr[j]);
                 }
                 printf("\n");
-                // fprintf(fp, "%s", "\n");
+                fprintf(fp, "\n");
             }
         }
     }
     printf("压缩完成！\n");
-    // fprintf(fp, "%s", "压缩完成！\n");
-    // fclose(fp);
+    fprintf(fp, "%s", "压缩完成！");
+    fclose(fp);
     return error_code;
 }
