@@ -7,8 +7,7 @@ Sophomore Course Design in C and Python.
 2. Python GUI.
 
 ## Screenshot
-<img src="http://o7gy5l0ax.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160803203555.png" width = "400" height = "360" alt=""/>
-http://o7gy5l0ax.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160803203555.png
+<img src="http://o7gy5l0ax.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160803203555.png" width = "400" height = "360" alt="1"/>
 
 ## About Me
 A student of Xi'an University of Posts and Telecommunications in mainland China. Currently learning Android development.
