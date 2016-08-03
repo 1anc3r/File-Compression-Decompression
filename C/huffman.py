@@ -21,7 +21,7 @@ class huffman(wx.Dialog):
         file_object = open(self.pathText.GetValue()+'.log', 'rb')
         try:
             i = 0
-            while i<1000:
+            while i<1024:
                 line = file_object.readline()
                 self.DisplayText.AppendText(line.decode('gbk', 'replace'))
                 i = i+1
