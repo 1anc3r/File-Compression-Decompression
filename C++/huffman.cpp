@@ -25,13 +25,13 @@ int main(int argc, char* argv[]) {
 	int key;
 	do {
 		cout<<"+------------+"<<endl;
-		cout<<"| 1.Ñ¹ËõÎÄ¼þ |"<<endl;
-		cout<<"| 2.½âÑ¹ÎÄ¼þ |"<<endl;
+		cout<<"| 1.Ã‘Â¹Ã‹ÃµÃŽÃ„Â¼Ã¾ |"<<endl;
+		cout<<"| 2.Â½Ã¢Ã‘Â¹ÃŽÃ„Â¼Ã¾ |"<<endl;
 		cout<<"+------------+"<<endl;
 		cin>>key;
 		getchar();
 		string in_filename;
-		cout<<"ÇëÊäÈëÎÄ¼þÍêÕûÂ·¾¶£º"<<endl;
+		cout<<"Ã‡Ã«ÃŠÃ¤ÃˆÃ«ÃŽÃ„Â¼Ã¾ÃÃªÃ•Ã»Ã‚Â·Â¾Â¶Â£Âº"<<endl;
 		getline(cin, in_filename);
 		switch (key) {
 			case 1: compress(in_filename); break;
